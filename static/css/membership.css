@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;600&display=swap');
+
+$transition-time: 2.3s;
+
+body {
+    font-family: 'Oswald', sans-serif;
+    background-color: #212121;
+}
+
+section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+.container h1 {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.membership-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.membership-card {
+    position: relative;
+    height: 350px;
+    width: 30%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.membership-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.membership-card h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.membership-card .price {
+    font-size: 1.9rem;
+    color: white;
+}
+
+
+.membership-card a.btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #040f75, #00f2fe);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    align-self: center;
+    margin-top: auto;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.membership-card a.btn:hover {
+    background: linear-gradient(45deg, #00f2fe, #040f75);
+    transform: scale(1.05);
+}
+
+/* Images for membership cards */
+.membership-card.item-a {
+    background-image: url('/static/img/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.membership-card.item-b {
+    background-image: url('/static/img/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.membership-card.item-c {
+    background-image: url('/static/img/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .membership-card {
+        width: 45%;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .membership-card {
+        width: 100%;
+    }
+    .container h1 {
+        text-align: center;
+        font-size: 3rem;
+    }
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Membership Payment</title>
+</head>
+<body>
+    <h1>Choose Membership</h1>
+    <form method="POST" action="{% url 'membership_payment' %}">
+        {% csrf_token %}
+        <label for="plan_type">Membership Plan:</label>
+        <select id="plan_type" name="plan_type">
+            {% for membership in memberships %}
+                <option value="{{ membership.plan_type }}">{{ membership.get_plan_type_display }} - ${{ membership.price }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Proceed to Payment</button>
+    </form>
+</body>
+</html>

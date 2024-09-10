@@ -1,0 +1,105 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Icons and stylesheets -->
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>FitJourney Login</title>
+</head>
+
+<style>
+    body {
+        background: url("{% static 'img/coverlog.jpg' %}");
+    }
+</style>
+
+<body>
+    <div class="content">
+        <div class="form-block">
+            <div class="logo-container">
+                <img src="{% static 'img/fitjourney-logo.png' %}" alt="FitJourney Logo" class="logo">
+            </div>
+            <!-- <div class="mb-4">
+                <h2>Login to <strong>Your Account</strong></h2>
+            </div> -->
+            <span class="mb-0 text-muted" style="color: red;">
+                {% if msg %}
+                {{ msg | safe }}
+                {% else %}
+
+                {% endif %}
+            </span>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-user"></i>
+                        {{ form.username }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" name="password" class="form-control" oninput="toggleEyeIcon()">
+                        <i class="fa-solid fa-eye" id="togglePassword" style="display: none;" onclick="togglePasswordVisibility()"></i>
+                    </div>
+                </div>
+                <input type="submit" value="Log in" class="btn btn-pill text-white btn-primary">
+            </form>
+            <div class="option-choose">
+                <span>Are you a new user? <a href="{% url 'register' %}" class="register-link">Register</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript files -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/login.js' %}"></script>
+    <script>
+        function toggleEyeIcon() {
+            const passwordInput = document.getElementById('password');
+            const togglePasswordIcon = document.getElementById('togglePassword');
+    
+            // Show the eye icon only when there's input in the password field
+            if (passwordInput.value.length > 0) {
+                togglePasswordIcon.style.display = 'inline';
+            } else {
+                togglePasswordIcon.style.display = 'none';
+            }
+        }
+    
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const togglePasswordIcon = document.getElementById('togglePassword');
+    
+            // Toggle the type attribute
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePasswordIcon.classList.remove('fa-eye');
+                togglePasswordIcon.classList.add('fa-eye-slash'); // Change icon to eye-slash
+            } else {
+                passwordInput.type = 'password';
+                togglePasswordIcon.classList.remove('fa-eye-slash');
+                togglePasswordIcon.classList.add('fa-eye'); // Change icon back to eye
+            }
+        }
+    </script>
+    
+</body>
+
+</html>

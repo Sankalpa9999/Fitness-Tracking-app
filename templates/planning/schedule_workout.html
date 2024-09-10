@@ -1,0 +1,119 @@
+<!-- planning/templates/planning/schedule_workout.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .card {
+        background-color: #fff; /* White background */
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 400px; /* Adjust max-width as per your design */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s ease;
+        color: black;
+    }
+    
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    
+    .card-title {
+        margin-bottom: 15px;
+    }
+    
+    .btn {
+        transition: transform 0.3s ease;
+        cursor: pointer; /* Change cursor to pointer on hover */
+        text-decoration: none; /* Remove underline from <a> tag */
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background-color: #007bff; /* Blue color for primary button */
+        color: #fff; /* White text color */
+        width: 160px; /* Equal width for buttons */
+        text-align: center; /* Center text within buttons */
+        margin-right: 10px; /* Margin between buttons */
+    }
+    
+    .btn:hover {
+        transform: scale(1.1); /* Scale up on hover */
+        background-color: #0a294b; /* Darker blue on hover */
+    }
+    
+    .btn-secondary {
+        background-color: #6c757d; /* Gray background for secondary button */
+        border-color: #6c757d; /* Gray border color */
+    }
+    
+    .btn-secondary:hover {
+        background-color: #545b62; /* Darker gray on hover */
+        border-color: #545b62; /* Darker gray border color */
+    }
+    
+    /* Align input fields and labels */
+    form > div {
+        margin-bottom: 10px;
+    }
+    
+    form label {
+        display: block; /* Display labels as blocks to ensure input fields stack below them */
+        margin-bottom: 5px;
+    }
+    
+    form input[type="text"],
+    form input[type="date"] {
+        width: 100%; /* Make input fields full width */
+        padding: 8px; /* Padding for input fields */
+        border: 1px solid #ccc; /* Border style */
+        border-radius: 4px; /* Border radius */
+        box-sizing: border-box; /* Include padding and border in width */
+    }
+    
+    /* Increase width of workout_plan field */
+    #id_workout_plan {
+        width: 100%; /* Adjust width as needed */
+        height: 50px; /* Increase height for a bigger input field */
+        resize: none; /* Disable resizing */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .card {
+            width: 90%; /* Adjust card width for smaller screens */
+            margin: 10px auto; /* Adjust margin for smaller screens */
+        }
+
+        .btn {
+            width: 100%; /* Full width for buttons */
+            margin-right: 0; /* No margin between buttons */
+            margin-bottom: 10px; /* Margin bottom for spacing between buttons */
+        }
+    }
+</style>
+
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">Schedule Workout</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="id_workout_plan">Workout Plan:</label>
+                {{ form.workout_plan }}
+            </div>
+            <div>
+                <label for="id_date">Date:</label>
+                {{ form.date }}
+            </div>
+            <div style="margin-top: 15px;"> <!-- Margin between form and buttons -->
+                <button type="submit" class="btn btn-primary btn-sm">Schedule</button>
+                <a href="{% url 'workout_planner' %}" class="btn btn-secondary btn-sm">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

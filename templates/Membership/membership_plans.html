@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+
+    .membership-cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .membership-card {
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        width: 400px;
+        padding: 40px;
+        text-align: center;
+        border: 1px solid #ccc;
+        color: black;
+    }
+
+    .membership-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .price {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1em;
+        color: #d1b3b3;
+        background: linear-gradient(135deg, #042285 0%, #5b067c 100%);
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background 0.3s, transform 0.3s;
+    }
+
+    .btn:hover {
+        background: linear-gradient(135deg, #5b067c 0%, #042285 100%);
+        transform: scale(1.05);
+    }
+</style>
+
+<h2 class="page-title">Membership Plans</h2>
+<div class="membership-cards-container">
+    {% for membership in memberships %}
+    <div class="membership-card">
+        <h2 class="card-title">{{ membership.get_plan_type_display }}</h2>
+        <p class="price">Rs {{ membership.price }}/month</p>
+        <a href="{% url 'purchase_membership' membership.plan_type %}" class="btn">Join Now</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

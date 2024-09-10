@@ -1,0 +1,141 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa; /* Ensure background is consistent */
+    }
+
+    .card {
+        max-width: 400px; /* Default card width for larger screens */
+        height: auto; /* Adjust height automatically based on content */
+        min-height: 400px; /* Set a minimum height to ensure proper layout */
+        margin: 100px auto; /* Center the card horizontally and add space from the top */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        box-sizing: border-box; /* Ensure padding does not affect width */
+    }
+
+    .card h2 {
+        margin-top: 0;
+        text-align: center;
+        font-size: 24px; /* Smaller heading */
+        margin-bottom: 20px; /* Space below the heading */
+    }
+
+    .form-group {
+        margin-bottom: 15px; /* Ensure consistent space between fields */
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px; /* Space below the label */
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-group input, 
+    .form-group textarea, 
+    .form-group select {
+        width: 100%;
+        padding: 12px; /* Increased padding for better spacing */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px; /* Font size for fields */
+    }
+
+    .form-group textarea {
+        height: 100px; /* Fixed height for the textarea */
+        resize: vertical; /* Allows vertical resizing only */
+    }
+
+    .form-group input:focus, 
+    .form-group textarea:focus, 
+    .form-group select:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+    }
+
+    .form-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; /* Space between fields and buttons */
+    }
+
+    .form-buttons button {
+        padding: 12px 24px; /* Increase padding for better visibility */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px; /* Larger font size for buttons */
+        text-align: center;
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .form-buttons button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .card {
+            margin: 50px auto; /* Reduce top margin for smaller screens */
+            padding: 15px; /* Less padding on smaller screens */
+        }
+
+        .card h2 {
+            font-size: 20px; /* Smaller heading size for smaller screens */
+            margin-bottom: 15px; /* Adjust margin below heading */
+        }
+
+        .form-buttons button {
+            padding: 10px 20px; /* Adjust padding for medium screens */
+            font-size: 14px; /* Smaller font size for medium screens */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .card {
+            margin: 80px 20px; /* Increased top margin for very small screens */
+            padding: 10px; /* Less padding on very small screens */
+        }
+
+        .card h2 {
+            font-size: 18px; /* Even smaller heading size for very small screens */
+            margin-bottom: 10px; /* Adjust margin below heading */
+        }
+
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
+            padding: 10px; /* Slightly less padding for very small screens */
+            font-size: 12px; /* Smaller font size for fields */
+        }
+
+        .form-buttons button {
+            padding: 10px 20px; /* Maintain larger padding on very small screens */
+            font-size: 14px; /* Ensure font size is readable on very small screens */
+        }
+    }
+</style>
+
+<div class="card">
+    <h2>Update Progress</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <div class="form-buttons">
+            <button type="submit">Update</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

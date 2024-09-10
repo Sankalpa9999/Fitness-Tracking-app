@@ -1,0 +1,136 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+{% load static %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - User Goals</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 40px auto; /* Center the container with margin top and bottom */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+    }
+    h2 {
+        text-align: center; /* Center the heading */
+        margin-bottom: 20px;
+    }
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto; /* Make table scrollable on smaller screens */
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    th {
+        background-color: #f4f4f4;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    }
+    .actions a, .actions form button {
+        text-decoration: none;
+        padding: 6px 12px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .actions a {
+        background-color: #28a745;
+    }
+    .actions form button {
+        background-color: #dc3545;
+    }
+    .actions a:hover, .actions form button:hover {
+        opacity: 0.8;
+    }
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+        table {
+            font-size: 14px;
+        }
+        .actions {
+            flex-direction: column;
+            align-items: center;
+        }
+        .actions a, .actions form button {
+            margin: 5px 0;
+        }
+    }
+    @media (max-width: 480px) {
+        th, td {
+            font-size: 12px;
+            padding: 8px;
+        }
+    }
+</style>
+<script>
+    function confirmDelete(event, form) {
+        event.preventDefault(); // Prevent form submission
+        if (confirm('Are you sure you want to delete this goal?')) {
+            form.submit(); // Submit the form if confirmed
+        }
+    }
+</script>
+</head>
+<body>
+    <div class="container">
+        <h2>User Goals</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Goal Type</th>
+                        <th>Target Value</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Achieved</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for goal in goals %}
+                        <tr>
+                            <td>{{ goal.user.username }}</td>
+                            <td>{{ goal.get_goal_type_display }}</td>
+                            <td>{{ goal.target_value }}</td>
+                            <td>{{ goal.start_date }}</td>
+                            <td>{{ goal.end_date }}</td>
+                            <td>{{ goal.achieved|yesno:"Yes,No" }}</td>
+                            <td class="actions">
+                                <a href="{% url 'update_goal' goal.id %}"><i class="fas fa-edit"></i></a>
+                                <form action="{% url 'delete_goal' goal.id %}" method="post" style="display:inline;" onsubmit="confirmDelete(event, this);">
+                                    {% csrf_token %}
+                                    <button type="submit"><i class="far fa-trash-alt"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,180 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00796b;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.profile-picture {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.profile-picture-label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    cursor: pointer;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 150, 136, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.profile-picture:hover .overlay {
+    opacity: 1;
+}
+
+.camera-icon {
+    width: 30px;
+    height: 30px;
+    color: white;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #00796b;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+textarea {
+    width: calc(100% - 22px);
+    max-width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    justify-content: space-between; /* Adjust spacing between buttons */
+}
+
+.btn {
+    text-decoration: none;
+    width: 45%; /* Set buttons to take 45% of the width */
+    text-align: center;
+    padding: 8px;
+    background-color: #1b8175;
+    color: white;
+    border: 1px solid #004d40;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 5px 0; /* Add vertical margin for spacing */
+}
+
+.btn:hover {
+    background-color: #004d40;
+    color: #ffffff;
+}
+
+.cancel-btn {
+    background-color: #d41a1a;
+    border: 1px solid #8e0000;
+}
+
+.cancel-btn:hover {
+    background-color: #8e0000;
+    color: #ffffff;
+}
+
+.form-error {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+}
+
+.camera-icon {
+    font-size: 24px; /* Adjust size as needed */
+    color: #ffffff; /* Adjust color as needed */
+  }
+/* Media Queries for responsiveness */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    .profile-picture {
+        width: 120px;
+        height: 120px;
+    }
+
+    .btn {
+        width: 100%; /* Full width on small screens */
+        margin: 5px auto; /* Center buttons */
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.5em; /* Smaller heading size */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="date"],
+    textarea {
+        padding: 8px; /* Smaller padding */
+    }
+}

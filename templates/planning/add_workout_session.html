@@ -1,0 +1,183 @@
+<!-- planning/templates/planning/add_workout_session.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .card {
+        background-color: white;
+        padding: 15px;
+        margin: 10px auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        color: black;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 18px;
+        background-color: #318e9e;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .form-group label {
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .error {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        gap: 10px;
+        /* Adds gap between buttons */
+    }
+
+    .btn {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        color: white;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        font-size: 14px;
+        flex: 1;
+        /* Ensures buttons take equal space */
+        text-align: center;
+    }
+
+    .btn-submit {
+        background-color: #007bff;
+    }
+
+    .btn-submit:hover {
+        background-color: #0a294b;
+    }
+
+    .btn-back {
+        background-color: #6c757d;
+        line-height: normal;
+    }
+
+    .btn-back:hover {
+        background-color: #5a6268;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        .card {
+            padding: 10px;
+            margin: 5px;
+            max-width: 100%;
+        }
+
+        .button-group {
+            flex-direction: column;
+        }
+
+        .btn {
+            margin-bottom: 10px;
+            /* Adds gap between buttons on small screens */
+        }
+
+        h1 {
+            font-size: 16px;
+        }
+
+        .form-group label,
+        .form-group input,
+        .form-group select {
+            font-size: 12px;
+        }
+
+        .btn {
+            font-size: 12px;
+        }
+
+        .error {
+            font-size: 10px; /* Smaller font size for error messages on small screens */
+            margin-top: 3px; /* Adjusted margin for smaller screens */
+        }
+    }
+</style>
+
+<div class="card">
+    <h1>Add Workout Session to {{ workout_plan.exercise.name }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.exercise.label_tag }} {{ form.exercise }}
+            {% if form.exercise.errors %}
+                <div class="error">{{ form.exercise.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.sets.label_tag }} {{ form.sets }}
+            {% if form.sets.errors %}
+                <div class="error">{{ form.sets.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.reps.label_tag }} {{ form.reps }}
+            {% if form.reps.errors %}
+                <div class="error">{{ form.reps.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.duration.label_tag }} {{ form.duration }}
+            {% if form.duration.errors %}
+                <div class="error">{{ form.duration.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.rest_interval.label_tag }} {{ form.rest_interval }}
+            {% if form.rest_interval.errors %}
+                <div class="error">{{ form.rest_interval.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="button-group">
+            <button type="submit" class="btn btn-submit">Add Session</button>
+            <a href="{% url 'workout_planner' %}" class="btn btn-back">Back</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set Your Goal</title>
+<style>
+    .card {
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        width: 100%;
+        max-width: 400px;
+        margin: 30px auto;
+        box-sizing: border-box;
+    }
+
+    .card h1 {
+        margin-top: 0;
+        font-size: 24px;
+        text-align: center;
+        color: #333;
+    }
+
+    .history-btn {
+        display: block;
+        text-align: right;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .history-btn i {
+        margin-left: 5px;
+        font-size: 16px;
+    }
+
+    .history-btn:hover {
+        text-decoration: underline;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    form p {
+        margin-bottom: 15px;
+    }
+
+    label {
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    input,
+    select {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 16px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            width: 90%;
+            max-width: 90%;
+            margin: 20px auto;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .card {
+            padding: 15px;
+        }
+
+        .card h1 {
+            font-size: 20px;
+        }
+
+        .history-btn {
+            font-size: 12px;
+        }
+
+        button {
+            font-size: 14px;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Set Your Goal</h1>
+        <form method="post">
+            {% csrf_token %}
+            <p>
+                <label for="id_goal_type">Goal Type:</label>
+                <select name="goal_type" id="id_goal_type">
+                    <option value="#">-------------</option>
+                    <option value="weight_loss">Weight Loss</option>
+                    <option value="muscle_gain">Muscle Gain</option>
+                    <option value="endurance_improvement">Endurance Improvement</option>
+                    <option value="flexibility">Flexibility</option>
+                </select>
+            </p>
+            <p>
+                <label for="id_target_value">Target Value:</label>
+                <input type="number" name="target_value" step="1" id="id_target_value">
+            </p>
+            <p>
+                <label for="id_start_date">Start Date:</label>
+                <input type="date" name="start_date" id="id_start_date">
+            </p>
+            <p>
+                <label for="id_end_date">End Date:</label>
+                <input type="date" name="end_date" id="id_end_date">
+            </p>
+            <button type="submit">Set Goal</button>
+        </form>
+        <a class="history-btn" href="{% url 'goal_history' %}">
+            View History <i class="fas fa-history"></i>
+        </a>
+    </div>
+{% endblock %}

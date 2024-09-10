@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitJourney - Membership</title>
+    <link rel="stylesheet" href="{% static 'css/membership.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <section class="membership">
+        <div class="container">
+            <h1 class="section-title">Membership Plans</h1>
+            <div class="membership-cards">
+                <div class="membership-card item-a">
+                    <h2>Basic Plan</h2>
+                    <p class="price">$10/month</p>
+                    <a href="{% url 'home' %}" class="btn">Join Now</a>
+                </div>
+                <div class="membership-card item-b">
+                    <h2>Standard Plan</h2>
+                    <p class="price">$20/month</p>
+                    <a href="{% url 'home' %}" class="btn">Join Now</a>
+                </div>
+                <div class="membership-card item-c">
+                    <h2>Premium Plan</h2>
+                    <p class="price">$30/month</p>
+                    <a href="{% url 'home' %}" class="btn">Join Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JS link -->
+    <script src="{% static 'js/min.js' %}"></script>
+</body>
+
+</html>

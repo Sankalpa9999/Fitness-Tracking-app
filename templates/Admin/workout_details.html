@@ -1,0 +1,54 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/adminpanel/workout_details.css' %}">
+
+<div class="container">
+    <h1>Workout Details</h1>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Member</th>
+                        <th>Workout Name</th>
+                        <th>Date</th>
+                        <th>Duration</th>
+                        <th>Distance Covered</th>
+                        <th>Calories Burned</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if workouts_by_member %}
+                    {% for member, workouts in workouts_by_member.items %}
+                    {% for workout in workouts %}
+                    <tr>
+                        <td>{{ member.name }}</td>
+                        <td>{{ workout.exercise.name }}</td>
+                        <td>{{ workout.date }}</td>
+                        <td>{{ workout.duration }}</td>
+                        <td>{{ workout.distance_covered }} km</td>
+                        <td>{{ workout.calories_burned }} kcal</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{% url 'update_workout' workout.id %}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{% url 'confirm_delete_workout' workout.id %}" class="btn-delete"><i class="far fa-trash-alt"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="8">No workouts logged for any member</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

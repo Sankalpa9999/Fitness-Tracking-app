@@ -1,0 +1,77 @@
+.container {
+    margin-top: 20px; /* Adds top margin */
+    padding: 20px; /* Adds padding inside the container */
+    background-color: #ffffff; /* White background for the card */
+    border: 1px solid #ddd; /* Light border around the card */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    max-width: 1000px; /* Maximum width of the card */
+    margin-left: auto;
+    margin-right: auto; /* Center the card horizontally */
+}
+
+h1 {
+    text-align: center; /* Centers the heading */
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none; /* Removes underline from all anchor tags */
+    color: inherit; /* Inherit the text color from the parent element */
+}
+
+.btn-group {
+    display: flex; /* Aligns the buttons side by side */
+    gap: 10px; /* Adds space between the buttons */
+}
+
+.btn {
+    padding: 8px 12px; /* Consistent padding for both buttons */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px; /* Font size */
+    text-align: center; /* Centers text inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition effects */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text color */
+    border: none; /* Removes border */
+    padding: 8px 12px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+    transform: translateY(-2px); /* Slightly lifts the button on hover */
+}
+
+.btn-delete {
+    background-color: #ff4d4d; /* Red background color */
+    color: white; /* White text color */
+    padding: 8px 12px; /* Padding inside the button */
+    border: none; /* Removes border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    display: inline-block; /* Ensures button-like appearance */
+    font-size: 14px; /* Font size */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Adds smooth transition effects */
+}
+
+.btn-delete:hover {
+    background-color: #ff1a1a; /* Darker red on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+    transform: translateY(-2px); /* Slightly lifts the button on hover */
+}
+
+.table-bordered th, .table-bordered td {
+    text-align: center; /* Centers text in table cells */
+    vertical-align: middle; /* Vertically centers text */
+    padding: 10px; /* Adds padding inside the table cells */
+}

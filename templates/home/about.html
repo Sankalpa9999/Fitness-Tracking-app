@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+<div class="responsive-container-block bigContainer">
+    <h1 class="about-heading">About Us</h1>
+    <div class="responsive-container-block Container">
+        <img class="mainImg" src="{% static 'img/fitstory.jpg' %}">
+        <div class="allText aboveText">
+            <p class="text-blk headingText">Our Story</p>
+            <p class="text-blk subHeadingText">Starting with a vision to create a supportive community for all fitness enthusiasts.</p>
+            <p class="text-blk description">
+                FitJourney began with a simple yet powerful idea: to empower individuals on their fitness journeys.
+                Founded by a team passionate about health and wellness, our story is one of dedication to helping people
+                achieve their fitness goals. We started with a vision to create a supportive community where everyone,
+                regardless of their starting point, could find the tools and encouragement needed to live healthier
+                lives.
+            </p>
+            <!-- <button class="explore">Explore</button> -->
+        </div>
+    </div>
+    <div class="responsive-container-block Container bottomContainer">
+        <img class="mainImg" src="{% static 'img/fitvision.jpg' %}">
+        <div class="allText bottomText">
+            <p class="text-blk headingText">Our Vision</p>
+            <p class="text-blk subHeadingText">Revolutionizing fitness by making health accessible and empowering for everyone.</p>
+            <p class="text-blk description">
+                Our vision at FitJourney is to revolutionize the way people approach fitness and well-being. We envision
+                a world where everyone feels empowered to prioritize their health, supported by accessible resources and
+                a vibrant community. Through innovative technology and personalized guidance, we aim to inspire lasting
+                lifestyle changes that promote physical and mental well-being.
+            </p>
+            <!-- <button class="explore">Explore</button> -->
+        </div>
+    </div>
+    <div class="responsive-container-block Container">
+        <img class="mainImg" src="{% static 'img/fitmission.jpg' %}">
+        <div class="allText aboveText">
+            <p class="text-blk headingText">Our Mission</p>
+            <p class="text-blk subHeadingText">Providing personalized guidance, motivation, and resources for sustainable fitness.</p>
+            <p class="text-blk description">
+                At FitJourney, our mission is clear: to provide individuals with the guidance, motivation, and resources
+                they need to embark on and sustain their fitness journeys. We are committed to offering a comprehensive
+                platform that integrates personalized workout plans, progress tracking, educational content, and
+                community support. By fostering a culture of inclusivity and empowerment, we strive to make fitness not
+                just a goal, but a sustainable lifestyle choice for all.
+            </p>
+            <!-- <button class="explore">Explore</button> -->
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/min.js' %}"></script>
+<script src="{% static 'js/afterlogin.js' %}"></script>
+
+{% endblock %}

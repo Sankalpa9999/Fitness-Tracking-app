@@ -1,0 +1,274 @@
+/* Base styles */
+body {
+    color: #000000;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    padding: 2rem;
+    background: linear-gradient(90deg, #a28acf, #088297);
+}
+
+.wrapper {
+    background: none; 
+}
+
+.content {
+    width: 100%;
+    max-width: 400px; /* Fixed max width for forms */
+    padding: 3rem;
+    background: linear-gradient(45deg, #088297, #06508d); /* Gradient background */
+    color: black;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(255, 255, 255, 0.3) 0px 1px 3px -1px;
+    height: auto;
+    box-sizing: border-box; /* Include padding and border in total width */
+    overflow: hidden; /* Prevent overflowing content */
+}
+
+.content:hover {
+    box-shadow: 10px 30px 40px rgba(5, 1, 58, 0.8);
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 70%; /* Responsive logo size */
+    height: auto;
+}
+
+.form-block {
+    text-align: center;
+}
+
+.form-block h3 {
+    color: #000000;
+    margin-bottom: 1.5rem;
+}
+
+.form-block label {
+    color: #000000;
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.input-icon {
+    display: flex;
+    align-items: center;
+    position: relative; /* Position relative to allow absolute positioning of the eye icon */
+}
+
+.input-icon i {
+    margin-right: 10px; /* Space between the icon and the input field */
+    color: #000000; /* Icon color */
+    font-size: 1rem; /* Icon size */
+}
+
+.input-icon .form-control {
+    flex-grow: 1; /* Allow the input field to take up remaining space */
+    padding: 0.75rem; /* Adjust padding */
+}
+
+#togglePassword, #togglePassword1, #togglePassword2 {
+    position: absolute; /* Position the eye icon absolutely */
+    right: 10px; /* Adjust the distance from the right */
+    cursor: pointer; /* Change cursor to pointer */
+    color: #000000; /* Icon color */
+    display: none; /* Initially hidden */
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+    background: #ffffff;
+    border: 1px solid #444;
+    color: #000000;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    box-sizing: border-box; /* Include padding and border in total width */
+}
+
+.btn-primary {
+    width: 100%; /* Full width by default */
+    max-width: 200px; /* Limit maximum width */
+    padding: 0.75rem; /* Adjusted padding */
+    background: linear-gradient(45deg, #042b96, #1f0350); /* Gradient background */
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+.btn-primary:hover {
+    background: linear-gradient(45deg,  #1f0350, #042b96); /* Adjusted gradient on hover */
+}
+
+.register-link {
+    margin-top: 20px;
+    color: #f3e6e6;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    color: #000000;
+}
+
+.option-choose {
+    margin-top: 20px;
+}
+
+.option-choose span a {
+    padding-left: 5px;
+    text-decoration: underline;
+}
+
+.control {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    user-select: none;
+    color: #555;
+}
+
+.control input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.control__indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+    border: 1px solid #050505;
+    border-radius: 3px;
+}
+
+.control--checkbox .control__indicator:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.control input:checked ~ .control__indicator {
+    background-color: #071a57;
+    border: none;
+}
+
+.control input:checked ~ .control__indicator:after {
+    display: block;
+}
+
+.control--checkbox .control__indicator:after {
+    left: 3px;
+    top: 1px;
+    width: 8px;
+    height: 12px;
+    border: solid rgb(255, 255, 255);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+
+
+@media only screen and (max-width: 900px) {
+    .content {
+        padding: 2rem; /* Adjust padding for medium screens */
+        max-width: 80%; /* Allow more width on medium screens */
+    }
+
+    .form-control {
+        padding: 0.5rem 0.5rem 0.5rem 2rem; /* Adjusted padding for smaller inputs */
+    }
+
+    .btn-primary {
+        width: 100%; /* Full width on medium screens */
+        padding: 0.5rem; /* Reduced padding for smaller button size */
+    }
+
+    .input-icon i {
+        font-size: 1.5rem; /* Keep icon size consistent */
+    }
+
+    .logo {
+        max-width: 70%; /* Further reduce logo size on medium screens */
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .content {
+        padding: 1rem; /* Adjust padding for smaller screens */
+        max-width: 90%; /* Allow more width on smaller screens */
+    }
+
+    .form-control {
+        padding: 0.5rem 0.5rem 0.5rem 2rem; /* Adjusted padding for smaller inputs */
+    }
+
+    .btn-primary {
+        width: 100%; /* Full width on smaller screens */
+        max-width: 100%; /* Ensure button adjusts to container width */
+        padding: 0.5rem; /* Reduced padding for smaller button size */
+    }
+
+    .input-icon i {
+        font-size: 1.2rem; /* Smaller icon size for mobile */
+    }
+
+    .logo {
+        max-width: 60%; /* Further reduce logo size on mobile */
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .content {
+        padding: 1rem; /* Adjust padding for smaller screens */
+        max-width: 90%; /* Allow more width on smaller screens */
+    }
+
+    .form-control {
+        padding: 0.5rem 0.5rem 0.5rem 2rem; /* Adjusted padding for smaller inputs */
+    }
+
+    .btn-primary {
+        width: 100%; /* Full width on smaller screens */
+        max-width: 100%; /* Ensure button adjusts to container width */
+        padding: 0.5rem; /* Reduced padding for smaller button size */
+    }
+
+    .input-icon i {
+        font-size: 1.2rem; /* Smaller icon size for mobile */
+    }
+
+    .logo {
+        width: 80%; /* Make logo smaller on mobile */
+    }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    /* Styles for tablets */
+    .content {
+        padding: 2rem; /* Slightly reduced padding for tablet sizes */
+    }
+
+    .logo {
+        width: 60%; /* Logo adjusts to tablet size */
+    }
+}
+

@@ -1,0 +1,200 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa; /* Ensure background is consistent */
+    }
+
+    .card {
+        max-width: 400px; /* Default card width for larger screens */
+        height: auto; /* Adjust height automatically based on content */
+        min-height: 350px; /* Set a minimum height to ensure proper layout */
+        margin: 80px auto 20px; /* Added top margin to push card down from navbar */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        box-sizing: border-box; /* Ensure padding does not affect width */
+    }
+
+    .card h1 {
+        margin-top: 0;
+        text-align: center;
+        font-size: 24px; /* Heading size */
+        margin-bottom: 20px; /* Space below the heading */
+    }
+
+    .form-group {
+        margin-bottom: 5px; /* Reduced space between fields */
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px; /* Reduced space below the label */
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-group input, 
+    .form-group select {
+        width: 100%;
+        padding: 10px; /* Adjusted padding for fields */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px; /* Font size for fields */
+    }
+
+    .form-group input:focus, 
+    .form-group select:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+    }
+
+    .form-group .error {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .form-buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px; /* Smaller gap between buttons */
+        margin-top: 10px; /* Space between fields and buttons */
+    }
+
+    .form-buttons .btn-submit, 
+    .form-buttons .btn-back {
+        padding: 8px 16px; /* Smaller padding for buttons */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px; /* Smaller font size for buttons */
+        text-align: center;
+        display: inline-block;
+        width: 48%;
+    }
+
+    .form-buttons .btn-submit {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .form-buttons .btn-submit:hover {
+        background-color: #0056b3;
+    }
+
+    .form-buttons .btn-back {
+        background-color: #6c757d;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .form-buttons .btn-back:hover {
+        background-color: #5a6268;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .card {
+            margin: 100px auto 20px; /* Increased top margin for medium screens */
+            padding: 15px; /* Less padding on smaller screens */
+        }
+
+        .card h1 {
+            font-size: 20px; /* Smaller heading size for smaller screens */
+            margin-bottom: 15px; /* Adjust margin below heading */
+        }
+
+        .form-buttons {
+            flex-direction: column; /* Stack buttons vertically on smaller screens */
+            align-items: center; /* Center buttons */
+        }
+
+        .form-buttons .btn-submit, 
+        .form-buttons .btn-back {
+            width: 100%; /* Full width buttons */
+            margin-bottom: 10px; /* Space between stacked buttons */
+        }
+
+        .form-buttons .btn-back {
+            margin-bottom: 0; /* Remove bottom margin from the last button */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .card {
+            margin: 120px auto 20px; /* Further increase top margin for very small screens */
+            padding: 10px; /* Less padding on very small screens */
+        }
+
+        .card h1 {
+            font-size: 18px; /* Even smaller heading size for very small screens */
+            margin-bottom: 10px; /* Adjust margin below heading */
+        }
+
+        .form-group input, 
+        .form-group select {
+            padding: 8px; /* Slightly less padding for very small screens */
+            font-size: 12px; /* Smaller font size for fields */
+        }
+
+        .form-buttons .btn-submit, 
+        .form-buttons .btn-back {
+            padding: 6px 12px; /* Smaller padding for very small screens */
+            font-size: 12px; /* Smaller font size for buttons */
+        }
+    }
+</style>
+
+<div class="card">
+    <h1>Edit Workout Session</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.exercise.label_tag }} 
+            {{ form.exercise }}
+            {% if form.exercise.errors %}
+                <div class="error">{{ form.exercise.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.sets.label_tag }} 
+            {{ form.sets }}
+            {% if form.sets.errors %}
+                <div class="error">{{ form.sets.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.reps.label_tag }} 
+            {{ form.reps }}
+            {% if form.reps.errors %}
+                <div class="error">{{ form.reps.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.duration.label_tag }} 
+            {{ form.duration }}
+            {% if form.duration.errors %}
+                <div class="error">{{ form.duration.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.rest_interval.label_tag }} 
+            {{ form.rest_interval }}
+            {% if form.rest_interval.errors %}
+                <div class="error">{{ form.rest_interval.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-buttons">
+            <button type="submit" class="btn-submit">Save</button>
+            <a href="{% url 'admin_view_workout_sessions' %}" class="btn-back">Back</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

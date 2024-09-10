@@ -1,0 +1,188 @@
+<!-- templates/Admin/update_member.html -->
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<style>
+/* Scoped styles for update_member.html */
+
+.update-member-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh; /* Ensure the card is vertically centered */
+}
+
+.update-member-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px; /* Adjust based on design */
+    box-sizing: border-box;
+}
+
+.update-member-card h1 {
+    text-align: center; /* Center the heading */
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.update-member-form-group {
+    margin: 0; /* Remove margin around form groups */
+    padding: 0; /* Remove padding around form groups */
+}
+
+.update-member-form-group label {
+    display: block; /* Ensure labels take full width */
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+.update-member-form-group input, 
+.update-member-form-group select, 
+.update-member-form-group textarea {
+    width: 100%; /* Make inputs, selects, and textareas full width */
+    box-sizing: border-box; /* Ensure padding is included in width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px; /* Space between fields */
+}
+
+.update-member-form-group input[type="checkbox"] {
+    display: none; /* Hide checkboxes */
+}
+
+.update-member-btn-submit {
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.update-member-btn-submit:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.update-member-profile-pic-container {
+    text-align: center; /* Center the profile picture container */
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.update-member-profile-pic {
+    display: block;
+    width: 120px; /* Set a fixed width for the profile picture */
+    height: 120px; /* Set a fixed height for the profile picture */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    border-radius: 50%; /* Make it circular */
+    margin: 0 auto; /* Center the image horizontally */
+    cursor: pointer; /* Show a pointer cursor to indicate that it's clickable */
+    transition: opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+.update-member-profile-pic:hover {
+    opacity: 0.8; /* Slightly reduce opacity on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+.update-member-icons {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.update-member-icon {
+    background: #007bff; /* Blue background for icons */
+    color: #fff; /* White icon color */
+    border-radius: 50%;
+    width: 30px; /* Icon size */
+    height: 30px; /* Icon size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; /* Pointer cursor to indicate clickability */
+    transition: background-color 0.3s ease;
+}
+
+.update-member-icon:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+</style>
+
+<div class="update-member-page">
+    <div class="update-member-card">
+        <h1>Update Member: {{ member.name }}</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Profile Picture Section -->
+            <div class="update-member-profile-pic-container">
+                
+                <img id="profilePic" src="{{ member.profile_picture.url }}" alt="Profile Picture" class="update-member-profile-pic">
+                <input type="file" id="profilePicInput" name="profile_picture" class="input-file" accept="image/*" onchange="previewImage(event)" style="display: none;">
+                <!-- <div class="update-member-icons">
+                    <div class="update-member-icon" onclick="document.getElementById('profilePicInput').click();">
+                        <i class="fa fa-camera"></i>  Replace with actual icon if not using Font Awesome 
+                    </div>
+                </div> -->
+                
+            </div>
+            
+            <!-- Form Fields -->
+            <div class="update-member-form-group">
+                <label for="id_name">Name:</label>
+                {{ form.name }}
+            </div>
+            <div class="update-member-form-group">
+                <label for="id_phone">Phone:</label>
+                {{ form.phone }}
+            </div>
+            <div class="update-member-form-group">
+                <label for="id_DOB">Date of Birth:</label>
+                {{ form.DOB }}
+            </div>
+            <div class="update-member-form-group">
+                <label for="id_occupation">Occupation:</label>
+                {{ form.occupation }}
+            </div>
+            <div class="update-member-form-group">
+                <label for="id_address">Address:</label>
+                {{ form.address }}
+            </div>
+            <div class="update-member-form-group">
+                <label for="id_email">Email:</label>
+                {{ form.email }}
+            </div>
+            
+            <div class="update-member-form-group">
+                <button type="submit" class="update-member-btn-submit">Save changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById('profilePic').addEventListener('click', function() {
+    document.getElementById('profilePicInput').click();
+});
+
+function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const output = document.getElementById('profilePic');
+        output.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+</script>
+
+{% endblock %}

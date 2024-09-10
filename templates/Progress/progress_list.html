@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .progress-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Add margin below the card */
+            text-align: center; /* Center align content */
+            width: 90%; /* Set width to 90% of the viewport width */
+            max-width: 600px; /* Limit maximum width for larger screens */
+            overflow-x: auto; /* Enable horizontal scrolling on smaller screens */
+            margin: 30px auto; /* Center align horizontally and add margin above and below the card */
+            color: black;
+        }
+        
+        .progress-table-wrapper {
+            overflow-x: auto; /* Enable horizontal scrolling for the table wrapper */
+        }
+        
+        .progress-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px; /* Smaller font size for the table */
+            margin-bottom: 20px; /* Add space below the table */
+        }
+        
+        .progress-table th, .progress-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .progress-table th {
+            background-color: #89ebeb;
+            font-weight: bold;
+        }
+        
+        .progress-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .btn-add, .btn-charts, .btn-edit {
+            display: inline-block; /* Display button as inline-block for side-by-side alignment */
+            padding: 6px 12px; /* Smaller padding for smaller button size */
+            margin-bottom: 10px; /* Add space below buttons */
+            text-decoration: none;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s ease; /* Smooth background color transition */
+        }
+        
+        .btn-add {
+            background-color: #007bff; /* Blue background */
+        }
+        
+        .btn-add:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        
+        .btn-charts {
+            background-color: #28a745; /* Green background */
+        }
+        
+        .btn-charts:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        
+        .btn-edit {
+            border: none;
+            background-image: linear-gradient(to right, #4e73df, #9452ba); /* Gradient background */
+        }
+        
+        .btn-edit:hover {
+            background-image: linear-gradient(to right, #3167eb, #6c36c4); /* Darker gradient on hover */
+        }
+        
+        /* Media query for responsiveness */
+        @media (max-width: 768px) {
+            .progress-card {
+                width: 100%; /* Set width to 100% to occupy full viewport width */
+                padding: 10px; /* Reduce padding for smaller screens */
+            }
+            
+            .progress-table {
+                font-size: 10px; /* Adjust font size for smaller screens */
+            }
+            
+            .progress-table-wrapper {
+                width: 100%; /* Ensure wrapper takes full width */
+                overflow-x: auto; /* Enable horizontal scrolling */
+            }
+            
+            .btn-add, .btn-charts, .btn-edit {
+                padding: 4px 8px; /* Adjust padding for smaller button size */
+                font-size: 10px; /* Adjust font size for smaller screens */
+            }
+        }
+    </style>
+
+    <div class="progress-card">
+        <h1>Progress List</h1>
+        <div class="progress-table-wrapper">
+            <table class="progress-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Weight</th>
+                        <th>Performance</th>
+                        <th>Workout Frequency</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for progress in progresses %}
+                        <tr>
+                            <td>{{ progress.date }}</td>
+                            <td>{{ progress.weight }}</td>
+                            <td>{{ progress.performance }}</td>
+                            <td>{{ progress.workout_frequency }}</td>
+                            <td>
+                                <a href="{% url 'edit_progress' progress.id %}" class="btn-edit">Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{% url 'add_progress' %}" class="btn-add">Add Progress</a>
+        <a href="{% url 'progress_charts' %}" class="btn-charts">View Charts</a>
+    </div>
+{% endblock %}

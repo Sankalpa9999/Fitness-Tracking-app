@@ -1,0 +1,99 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h1>Confirm Delete Workout</h1>
+            <p>Are you sure you want to delete the workout "<strong>{{ workout.exercise.name }}</strong>" performed by "<strong>{{ workout.member.name }}</strong>" on <strong>{{ workout.date }}</strong>?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                <a href="{% url 'view_scheduled_workouts' %}" class="btn btn-secondary">No, Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        width: 90%; /* Adjust width for small devices */
+        max-width: 400px; /* Reduce max-width for smaller card size */
+        margin: 30px auto; /* Center the container with margin */
+        padding: 0 10px; /* Padding for small screens */
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 15px; /* Reduced padding for smaller card */
+        margin-top: 20px; /* Margin to separate from the top */
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 15px; /* Reduced margin for smaller card */
+        color: #333;
+        font-size: 1.25rem; /* Adjusted font size */
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 16px; /* Reduced padding for smaller buttons */
+        margin: 5px;
+        border-radius: 5px;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.8rem; /* Smaller font size for buttons */
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    p {
+        text-align: center;
+        margin-bottom: 15px; /* Reduced margin for smaller card */
+        font-size: 0.9rem; /* Smaller font size for paragraph */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        .container {
+            width: 100%; /* Full width on small screens */
+            padding: 0 5px; /* Reduced padding for very small screens */
+        }
+
+        .btn {
+            padding: 6px 12px; /* Further reduced button padding for very small screens */
+            font-size: 0.75rem; /* Smaller font size for very small screens */
+        }
+
+        h1 {
+            font-size: 1.125rem; /* Adjust heading size for small screens */
+        }
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Workout</title>
+<style>
+    /* CSS for card-like styling */
+    .card {
+        width: 100%;
+        max-width: 400px;
+        /* Adjust max-width as needed */
+        margin: 20px auto;
+        padding: 20px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.3s ease;
+        color: black;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        /* Lift the card on hover */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Center the form within the card */
+    .card form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Additional styles for form elements if needed */
+    .card input[type="text"],
+    .card input[type="date"],
+    .card input[type="number"],
+    .card select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    .card input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .card input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Add Workout</h2>
+        <form method="POST" action="{% url 'log_workout' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+    
+            <label for="muscle_group">Muscle Group:</label>
+            <input type="text" id="muscle_group" name="muscle_group" readonly>
+        
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <script src="{% static 'js/musclegroups.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,107 @@
+/* Reset some default styles for a cleaner look */
+.container {
+    width: 100%;;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    margin-bottom: 10px;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1 1 500px; /* Flex-grow, flex-shrink, flex-basis */
+    max-width: 500px; /* Minimum width of each card */
+    width: 100%;
+    max-height: 300px;
+    height: auto;
+    overflow-y: auto;
+}
+.card .recent-activity{
+    border-bottom: 1px solid black;
+}
+
+.card a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.card a:hover {
+    background-color: #0056b3;
+}
+
+.card canvas {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.card h2{
+    color: black;
+}
+.activity-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.card li {
+    margin-bottom: 10px;
+    color: black;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    color: black; /* Explicitly setting text color to black */
+}
+
+table th {
+    background-color: #f2f2f2;
+    color: black; /* Ensuring header text color is black */
+}
+
+.list {
+    border-collapse: collapse;
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+
+
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .card {
+        min-width: auto;
+        width: 100%;
+    }
+}

@@ -1,0 +1,126 @@
+<!-- planning/templates/planning/progress_edit.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .card {
+        background-color: #fff; /* White background */
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 30px; /* Increased padding for more space inside the card */
+        margin: 20px auto;
+        width: 400px; /* Adjusted width for bigger cards */
+        max-width: calc(100% - 40px); /* Responsive max-width with margin */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s ease;
+        color: black;
+    }
+    
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    
+    h1 {
+        margin-bottom: 20px;
+    }
+    
+    form {
+        margin-bottom: 20px;
+    }
+    
+    form label {
+        display: block; /* Display labels as blocks to ensure input fields stack below them */
+        margin-bottom: 5px;
+    }
+    
+    form input[type="text"],
+    form input[type="number"],
+    form textarea,
+    form select,
+    form input[type="date"] {
+        width: 100%; /* Make input fields full width */
+        padding: 10px; /* Increased padding for input fields */
+        border: 1px solid #ccc; /* Border style */
+        border-radius: 4px; /* Border radius */
+        box-sizing: border-box; /* Include padding and border in width */
+        margin-bottom: 15px; /* Add margin bottom for spacing */
+    }
+    
+    .btn-container {
+        display: flex; /* Use flexbox for button alignment */
+        justify-content: flex-start; /* Align buttons to the start (left) of container */
+        align-items: center; /* Center items vertically */
+    }
+    
+    button[type="submit"],
+    a.back-btn {
+        padding: 14px 24px; /* Increased padding for buttons */
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff; /* Blue color for primary button */
+        color: #fff; /* White text color */
+        cursor: pointer; /* Change cursor to pointer on hover */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Add transition for background-color and transform */
+        text-decoration: none; /* Remove underline for anchor tag */
+        display: inline-block; /* Ensure link behaves like a button */
+        text-align: center; /* Center text within button */
+        margin-right: 5px; /* Small margin between buttons */
+    }
+    
+    button[type="submit"]:hover,
+    a.back-btn:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        transform: scale(1.1); /* Scale up on hover */
+    }
+    
+    a.back-btn {
+        padding: 12px 20px; /* Adjusted padding for back button */
+        background-color: #6c757d; /* Gray color for back button */
+        margin-left: 0; /* Remove margin for back button */
+    }
+    
+    a.back-btn:hover {
+        text-decoration: none; /* Remove underline on hover */
+        background-color: #5a6268; /* Darker gray on hover */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .card {
+            width: 90%; /* Adjust card width for smaller screens */
+            margin: 10px auto; /* Adjust margin for smaller screens */
+        }
+        
+        .btn-container {
+            flex-direction: column; /* Stack buttons vertically on smaller screens */
+            align-items: flex-start; /* Align buttons to the start (left) on smaller screens */
+        }
+        
+        button[type="submit"],
+        a.back-btn {
+            margin-right: 0; /* Remove margin between buttons on smaller screens */
+            margin-bottom: 10px; /* Add bottom margin for spacing */
+            width: 100%; /* Full width for buttons on smaller screens */
+        }
+    }
+</style>
+
+<div class="card">
+    <div class="card-body">
+        <h1>Edit Progress</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <!-- Button container for horizontal alignment -->
+            <div class="btn-container">
+                <button type="submit">Save</button>
+                <a href="{% url 'progress_list' %}" class="back-btn">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

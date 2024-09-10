@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration</title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .card {
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            color: #000; /* Dark black text color */
+        }
+        .form-floating {
+            margin-bottom: .5rem;
+            position: relative;
+        }
+        .form-floating input[type="password"] {
+            padding-right: 3rem;
+        }
+        .form-floating .toggle-password {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6c757d;
+        }
+        .form-check {
+            margin-top: .5rem;
+        }
+        .btn {
+            padding: .75rem 1.25rem;
+        }
+        .logo-container {
+            background-color: black; /* Black background for the logo */
+            padding: 0.5rem; /* Optional padding around the logo */
+            border-radius: 0.25rem; /* Optional rounded corners */
+            display: inline-block; /* Ensure it wraps tightly around the logo */
+        }
+        .logo-container img {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<section class="bg-light p-3 p-md-4 p-xl-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card border border-light-subtle rounded-4">
+                    <div class="card-body p-3 p-md-4 p-xl-5">
+                        <div class="text-center mb-4">
+                            <a href="#!" class="logo-container">
+                                <img src="{% static 'img/fitjourney-logo.png' %}" alt="FitJourney Logo" width="175" height="57">
+                            </a>
+                        </div>
+                        <h2 class="h4 text-center mb-4">Admin Registration</h2>
+                        
+                        {% if msg %}
+                            <div class="alert alert-info" role="alert">
+                                {{ msg }}
+                            </div>
+                        {% endif %}
+                        
+                        <form method="post" action="{% url 'admin_register' %}">
+                            {% csrf_token %}
+                            <div class="row gy-2">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        {{ form.username }}
+                                        <label for="id_username" class="form-label">Username</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        {{ form.email }}
+                                        <label for="id_email" class="form-label">Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        {{ form.password1 }}
+                                        <label for="id_password1" class="form-label">Password</label>
+                                        <i class="fas fa-eye toggle-password" onclick="togglePassword('id_password1')"></i>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        {{ form.password2 }}
+                                        <label for="id_password2" class="form-label">Confirm Password</label>
+                                        <i class="fas fa-eye toggle-password" onclick="togglePassword('id_password2')"></i>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="iAgree" required>
+                                        <label class="form-check-label text-secondary" for="iAgree">
+                                            I agree to the <a href="#!" class="link-primary text-decoration-none">terms and conditions</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary" type="submit">Sign up</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row mt-4">
+                            <div class="col-12 text-center">
+                                <hr class="border-secondary-subtle">
+                                <p class="m-0 text-secondary">Already have an account? <a href="{% url 'login_view' %}" class="link-primary text-decoration-none">Sign in</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function togglePassword(id) {
+        var passwordField = document.getElementById(id);
+        var passwordFieldType = passwordField.getAttribute('type');
+        var eyeIcon = document.querySelector(`#${id} ~ .toggle-password`);
+        
+        if (passwordFieldType === 'password') {
+            passwordField.setAttribute('type', 'text');
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.setAttribute('type', 'password');
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+        }
+    }
+</script>
+</body>
+</html>

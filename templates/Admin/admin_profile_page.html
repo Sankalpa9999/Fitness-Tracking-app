@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            color: #797979;
+            background: #f1f2f7;
+            font-family: 'Open Sans', sans-serif;
+            padding: 0px !important;
+            margin: 0px !important;
+            font-size: 13px;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-font-smoothing: antialiased;
+        }
+
+        .profile-nav,
+        .profile-info {
+            margin-top: 30px;
+        }
+
+        .profile-nav .user-heading {
+            background: #fbc02d;
+            color: #fff;
+            border-radius: 4px 4px 0 0;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .profile-nav .user-heading.round a {
+            border-radius: 50%;
+            border: 10px solid rgba(255, 255, 255, 0.3);
+            display: inline-block;
+        }
+
+        .profile-nav .user-heading a img {
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+        }
+
+        .profile-nav .user-heading h1 {
+            font-size: 22px;
+            font-weight: 300;
+            margin-bottom: 5px;
+        }
+
+        .profile-nav .user-heading p {
+            font-size: 12px;
+        }
+
+        .profile-nav ul {
+            margin-top: 1px;
+        }
+
+        .profile-nav ul>li {
+            border-bottom: 1px solid #ebeae6;
+        }
+
+        .profile-nav ul>li:last-child {
+            border-bottom: none;
+        }
+
+        .profile-nav ul>li>a {
+            padding: 10px 15px;
+            font-size: 13px;
+            color: #89817f;
+        }
+
+        .profile-nav ul>li>a:hover,
+        .profile-nav ul>li>a:focus {
+            background: #fbc02d !important;
+            color: #fff !important;
+        }
+
+        .profile-nav ul>li.active>a {
+            color: #fff !important;
+            background-color: #fbc02d !important;
+            border-left: 2px solid #fbc02d;
+        }
+
+        .profile-info .panel {
+            box-shadow: none;
+            border-radius: 4px;
+        }
+
+        .bio-graph-heading {
+            background: #e9eeef;
+            color: #b3b3b3;
+            font-style: italic;
+            padding: 40px 110px;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 4px 4px 0 0;
+            margin-bottom: 20px;
+        }
+
+        .bio-graph-info {
+            color: #89817e;
+        }
+
+        .bio-graph-info h1 {
+            font-size: 22px;
+            margin: 0 0 20px;
+        }
+
+        .bio-row {
+            width: 50%;
+            float: left;
+            margin-bottom: 10px;
+            padding: 0 15px;
+        }
+
+        .bio-row p span {
+            width: 100px;
+            display: inline-block;
+        }
+
+        .bio-chart,
+        .bio-desk {
+            display: inline-block;
+        }
+
+        .bio-chart {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+        }
+
+        .bio-desk {
+            width: calc(100% - 100px);
+            padding-left: 20px;
+        }
+
+        .bio-desk h4 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+
+        .bio-desk p {
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .btn-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-group a {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .btn-group a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container bootstrap snippets bootdey">
+        <div class="row">
+            <div class="profile-nav col-md-3">
+                <div class="panel">
+                    <div class="user-heading round">
+                        <a href="{% url 'update_admin_profile' %}">
+                            {% if profile.profile_picture %}
+                            <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-img">
+                            {% else %}
+                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Default Profile Picture"
+                                class="profile-img">
+                            {% endif %}
+                        </a>
+                        <h1>{{ profile.name }}</h1>
+                        <p>{{ profile.email }}</p>
+                    </div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+
+                        <li><a href="{% url 'update_admin_profile' %}"> <i class="fa fa-edit"></i> Edit Profile</a></li>
+                        <li><a href="{% url 'adminsite' %}"> <i class="fa fa-edit"></i> Back</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="profile-info col-md-9">
+                <div class="panel">
+                    <div class="panel-body bio-graph-info">
+                        <h1>Admin Details</h1>
+                        <div class="row">
+                            <div class="bio-row">
+                                <p><span>Name: </span> {{ profile.name }}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>Phone: </span> {{ profile.phone }}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>Date of Birth: </span> {{ profile.DOB }}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>Occupation: </span> {{ profile.occupation }}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>Address: </span> {{ profile.address }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

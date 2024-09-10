@@ -1,0 +1,137 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="heading">All Progress Records</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Weight</th>
+                    <th>Performance</th>
+                    <th>Workout Frequency</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for progress in progresses %}
+                <tr>
+                    <td>{{ progress.user.username }}</td>
+                    <td>{{ progress.date }}</td>
+                    <td>{{ progress.weight }}</td>
+                    <td>{{ progress.performance }}</td>
+                    <td>{{ progress.workout_frequency }}</td>
+                    <td class="actions">
+                        <a href="{% url 'update_progress_view' progress.id %}" class="btn edit">
+                            <i class="fas fa-edit"></i>
+                        </a> 
+                        <a href="{% url 'delete_progress_view' progress.id %}" class="btn delete">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .container {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .heading {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead {
+        background-color: #f1f1f1;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        font-weight: bold;
+        background-color: #f4f4f4;
+        word-wrap: break-word; /* Ensure header text wraps */
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .actions {
+        display: flex;
+        gap: 8px; /* Adds space between buttons */
+        justify-content: center; /* Center-align buttons */
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        color: #fff;
+        text-decoration: none;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .btn.edit {
+        background-color: #28a745;
+    }
+
+    .btn.edit:hover {
+        background-color: #218838;
+    }
+
+    .btn.delete {
+        background-color: #dc3545;
+    }
+
+    .btn.delete:hover {
+        background-color: #c82333;
+    }
+
+    .btn i {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .btn {
+            padding: 4px 6px; /* Smaller padding for smaller screens */
+            font-size: 12px; /* Smaller font size */
+        }
+    }
+</style>
+
+<!-- Include Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock %}

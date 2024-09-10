@@ -1,0 +1,128 @@
+<!-- planning/templates/planning/create_workout_plan.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .card {
+        background-color: #fff; /* White background */
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 400px; /* Adjust max-width as per your design */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s ease;
+        color: black;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 18px;
+        background-color: #318e9e;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+    }
+    
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    
+    .card-title {
+        margin-bottom: 15px;
+    }
+    
+    .btn {
+        transition: transform 0.3s ease;
+        cursor: pointer; /* Change cursor to pointer on hover */
+        text-decoration: none; /* Remove underline from <a> tag */
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background-color: #007bff; /* Blue color for primary button */
+        color: #fff; /* White text color */
+        width: 120px; /* Equal width for buttons */
+        text-align: center; /* Center text within buttons */
+        margin-right: 10px; /* Margin between buttons */
+    }
+    
+    .btn:hover {
+        transform: scale(1.1); /* Scale up on hover */
+        background-color: #0a294b; /* Darker blue on hover */
+    }
+    
+    .btn-secondary {
+        background-color: #6c757d; /* Gray background for secondary button */
+        border-color: #6c757d; /* Gray border color */
+    }
+    
+    .btn-secondary:hover {
+        background-color: #545b62; /* Darker gray on hover */
+        border-color: #545b62; /* Darker gray border color */
+    }
+    
+    /* Align input fields and labels */
+    form > div {
+        margin-bottom: 10px;
+    }
+    
+    form label {
+        display: block; /* Display labels as blocks to ensure input fields stack below them */
+        margin-bottom: 5px;
+    }
+    
+    form input[type="text"],
+    form textarea {
+        width: 100%; /* Make input fields and textarea full width */
+        padding: 8px; /* Padding for input fields and textarea */
+        border: 1px solid #ccc; /* Border style */
+        border-radius: 4px; /* Border radius */
+        box-sizing: border-box; /* Include padding and border in width */
+    }
+    
+    /* Increase width of exercise field */
+    #id_exercise {
+        width: 100%; /* Adjust width as needed */
+        height: 50px; /* Increase height for a bigger input field */
+        resize: none; /* Disable resizing */
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+        .card {
+            padding: 10px;
+            max-width: 100%;
+        }
+    }
+    
+    @media (min-width: 577px) and (max-width: 1024px) {
+        .card {
+            max-width: 80%;
+        }
+    }
+</style>
+
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">Create Workout Plan</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="id_exercise">Exercise:</label>
+                {{ form.exercise }}
+            </div>
+            <div>
+                <label for="id_description">Description:</label>
+                {{ form.description }}
+            </div>
+            <div style="margin-top: 15px;"> <!-- Margin between form and buttons -->
+                <button type="submit" class="btn btn-primary btn-sm">Create</button>
+                <a href="{% url 'workout_planner' %}" class="btn btn-secondary btn-sm">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

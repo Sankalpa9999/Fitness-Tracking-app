@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+<link rel="stylesheet" href="{% static 'css/service.css' %}">
+<div class="container">
+    <h2>Our Services</h2>
+    <div class="row">
+      <div class="card">
+        <img src="{%static 'img/monitor.jpg'%}" alt="Dashboard">
+        <h3>Personalized Dashboard</h3>
+        <p>Provides an overview and visual tracking of fitness activities and progress.</p>
+        <a href="{% url 'dashboard' %}" class="btn">Proceed</a>
+      </div>
+      <div class="card">
+        <img src="{%static 'img/workoutlog.jpg'%}" alt="Wokout set">
+        <h3>Workout Logging</h3>
+        <p>Easily log workout details and select exercises from a library.</p>
+        <a href="{% url 'log_workout' %}" class="btn">Proceed</a>
+      </div>
+      <div class="card">
+        <img src="{%static 'img/goal setting.jpg'%}" alt="Goal set">
+        <h3>Goal Setting and Tracking</h3>
+        <p>Set specific fitness goals, visualize progress, and edit goals as needed.</p>
+        <a href="{% url 'set_goal' %}" class="btn">Proceed</a>
+      </div>
+      <div class="card">
+        <img src="{%static 'img/exerciselibrary.jpg'%}" alt="Library">
+        <h3>Exercise Library</h3>
+        <p>Access a wide range of exercises with detailed instructions and media.</p>
+        <a href="{% url 'exercise_list' %}" class="btn">Proceed</a>
+      </div>
+      <div class="card">
+        <img src="{%static 'img/workoutplanning.jpg'%}" alt="Planning">
+        <h3>Workout Planning</h3>
+        <p>Schedule workouts on a calendar and customize routines.</p>
+        <a href="{% url 'workout_planner' %}" class="btn">Proceed</a>
+      </div>
+      <div class="card">
+        <img src="{%static 'img/progresstrack.jpg'%}" alt="Tracking">
+        <h3>Progress Tracking</h3>
+        <p>Monitor progress with visual metrics and ensure workout consistency.</p>
+        <a href="{% url 'progress_list' %}" class="btn">Proceed</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'js/afterlogin.js' %}"></script>
+
+  {% endblock %}

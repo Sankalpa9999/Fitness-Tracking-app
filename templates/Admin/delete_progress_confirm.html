@@ -1,0 +1,111 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+{% load static %}
+<style>
+    /* Container Style */
+    .container {
+        max-width: 600px; /* Set a max-width for larger screens */
+        margin: 20px auto; /* Center the container and add margin */
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Heading Style */
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    /* Button Group Alignment */
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 10px; /* Space between buttons */
+        flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    }
+
+    /* Button Style */
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        text-align: center;
+        text-decoration: none; /* Remove underline */
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        font-size: 14px; /* Ensure button text is legible */
+    }
+
+    /* Danger Button Style */
+    .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        transform: scale(1.05); /* Optional: slight scaling effect on hover */
+    }
+
+    /* Secondary Button Style */
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        transform: scale(1.05); /* Optional: slight scaling effect on hover */
+    }
+
+    /* Paragraph Styling */
+    p {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Form Styling */
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container {
+            width: 90%; /* Increase width on smaller screens */
+            padding: 15px; /* Adjust padding */
+        }
+
+        .btn {
+            padding: 8px 16px; /* Adjust button padding for smaller screens */
+            font-size: 12px; /* Adjust font size for smaller screens */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .btn {
+            padding: 8px 12px; /* Further adjust button padding */
+            font-size: 10px; /* Further adjust font size */
+        }
+    }
+</style>
+
+<div class="container">
+    <h2>Delete Progress Record</h2>
+    <p>Are you sure you want to delete this progress record of <strong>{{ progress.user.username }}</strong> at <strong>{{ progress.date }}</strong>?</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="button-group">
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'admin_progress_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

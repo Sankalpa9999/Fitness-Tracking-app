@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        padding: 20px;
+        max-width: 900px; /* Increase maximum width for larger card size */
+        margin: 20px auto; /* Center the card horizontally with margin */
+        width: 100%; /* Ensure card takes full width */
+        box-sizing: border-box; /* Ensure padding is included in width */
+        color: black;
+    }
+
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto; /* Enable horizontal scroll on small screens */
+    }
+
+    .rounded-border {
+        width: 100%;
+        border: 1px solid #ccc; /* Add border around the table */
+        border-collapse: collapse;
+    }
+
+    .rounded-border th,
+    .rounded-border td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ccc; /* Add border around table cells */
+    }
+
+    .rounded-border th {
+        font-weight: bold;
+        color: black;
+        background-color: #107e6f; /* Background color for table headers */
+    }
+
+    .rounded-border tr:nth-child(even) {
+        background-color: #f9f9f9; /* Alternate row background color */
+    }
+
+    .rounded-border tr:hover {
+        background-color: #80ccc6; /* Hover background color */
+    }
+
+    .actions {
+        white-space: nowrap; /* Prevent button text wrapping */
+    }
+
+    .view-progress-btn {
+        display: inline-block;
+        padding: 6px 12px;
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .view-progress-btn:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .card {
+            padding: 15px;
+            max-width: 95%; /* Full width on smaller screens with some margin */
+        }
+
+        .rounded-border th,
+        .rounded-border td {
+            padding: 8px;
+            font-size: 14px; /* Adjust font size for smaller screens */
+        }
+
+        .view-progress-btn {
+            padding: 4px 8px;
+            font-size: 14px; /* Adjust button size for smaller screens */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .rounded-border th,
+        .rounded-border td {
+            font-size: 12px; /* Smaller font size on very small screens */
+            padding: 6px;
+        }
+
+        .view-progress-btn {
+            font-size: 12px; /* Smaller button font size */
+            padding: 3px 6px;
+        }
+    }
+
+
+    .container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: flex-start; /* Align items at the start vertically */
+        min-height: 80vh; /* Adjust this value as needed */
+        padding: 20px; /* Padding to ensure spacing */
+        box-sizing: border-box; /* Ensure padding is included in width/height */
+    }
+</style>
+
+
+<div class="container">
+
+<div class="card">
+    <h1 style="text-align: center;">My Goal History</h1>
+    <div class="table-wrapper">
+        <table class="rounded-border">
+            <thead>
+                <tr>
+                    <th>Goal Type</th>
+                    <th>Target Value</th>
+                    <th>End Date</th>
+                    <th>Achieved</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for goal in goals %}
+                <tr>
+                    <td>{{ goal.get_goal_type_display }}</td>
+                    <td>{{ goal.target_value }}</td>
+                    <td>{{ goal.end_date }}</td>
+                    <td>{% if goal.achieved %} Yes {% else %} No {% endif %}</td>
+                    <td class="actions">
+                        <a href="{% url 'track_progress' goal.id %}" class="view-progress-btn">View Progress</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+{% endblock %}

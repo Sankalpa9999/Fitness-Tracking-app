@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<title>{{ exercise.name }}</title>
+    <style>
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            color: black;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center; /* Center the image horizontally */
+            margin: 20px 0; /* Add margin to separate from other content */
+        }
+        .image-container img {
+            width: 50%; /* Medium size image */
+            max-width: 400px; /* Ensure image does not scale beyond this width */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: contain; /* Maintain aspect ratio and contain within container */
+            border-radius: 10px;
+        }
+        .container p, .container h1 {
+            margin: 10px 0;
+        }
+        .steps p {
+            margin: 10px 0;
+        }
+        .button, .gradient-button {
+            display: inline-block;
+            margin-top: 20px;
+            margin-right: 10px;
+            padding: 10px 20px;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .button {
+            background-color: #007bff;
+        }
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .gradient-button {
+            background: linear-gradient(45deg, #ff6b6b, #f06595);
+        }
+        .gradient-button:hover {
+            background: linear-gradient(45deg, #f06595, #ff6b6b);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            .button, .gradient-button {
+                margin-top: 15px;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+            .button, .gradient-button {
+                margin-top: 10px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ exercise.name }}</h1>
+        <div class="image-container">
+            <img src="{{ exercise.thumbnail.url }}" alt="{{ exercise.name }}">
+        </div>
+        <p><strong>Muscle Group:</strong> {{ exercise.muscle_group }}</p>
+        <p><strong>Equipment:</strong> {{ exercise.equipment }}</p>
+        <p><strong>Difficulty:</strong> {{ exercise.difficulty }}</p>
+        <p><strong>Description:</strong> {{ exercise.description }}</p>
+        <p><strong>Steps:</strong></p>
+        <div class="steps">
+            {{ exercise.steps|linebreaks }}
+        </div>
+        {% if exercise.video_url %}
+        <a href="{{ exercise.video_url }}" class="gradient-button">Watch Video</a>
+        {% endif %}
+        <!-- <a href="{% url 'exercise_update' exercise.pk %}" class="button">Edit</a> -->
+        <a href="{% url 'exercise_list' %}" class="button">Back to Exercise List</a>
+    </div>
+{% endblock %}

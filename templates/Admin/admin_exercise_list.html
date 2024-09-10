@@ -1,0 +1,117 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+{% load static %}
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Management</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .add-button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .add-button:hover {
+            background-color: #095219;
+            color: white;
+        }
+        ul.exercise-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul.exercise-list li {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .exercise-name {
+            font-size: 1.2em;
+            margin-right: 20px;
+        }
+        .exercise-actions {
+            display: flex;
+        }
+        .exercise-actions a,
+        .exercise-actions form {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .exercise-actions a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .exercise-actions a:hover {
+            background-color: #0056b3;
+        }
+        .delete-button {
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Manage Exercises</h1>
+        <a href="{% url 'exercise_create' %}" class="add-button">
+            <i class="fa-solid fa-plus"></i> Add Exercise
+        </a>
+    </div>
+    
+    <ul class="exercise-list">
+        {% for exercise in exercises %}
+        <li>
+            <span class="exercise-name">{{ exercise.name }}</span>
+            <div class="exercise-actions">
+                <a href="{% url 'exercise_update' exercise.pk %}"><i class="fas fa-edit"></i></a>
+                <form action="{% url 'exercise_delete' exercise.pk %}" method="POST" onsubmit="return confirm('Are you sure you want to delete this exercise?');">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-button"><i class="far fa-trash-alt"></i></button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

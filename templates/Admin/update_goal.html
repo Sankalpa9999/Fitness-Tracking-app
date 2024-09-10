@@ -1,0 +1,117 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Goal</title>
+    <style>
+        /* Ensure the styles only affect this page */
+        .update-goal-page {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+            margin-top: 50px; /* Add margin-top to the page */
+        }
+        .update-goal-card {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            margin: 20px auto;
+            box-sizing: border-box;
+        }
+        .update-goal-card h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        .update-goal-card form {
+            display: flex;
+            flex-direction: column;
+        }
+        .update-goal-card form .form-group {
+            margin-bottom: 15px;
+        }
+        .update-goal-card form .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .update-goal-card form .form-group input,
+        .update-goal-card form .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .update-goal-card form .button-group {
+            display: flex;
+            justify-content: center; /* Center the buttons */
+            gap: 10px; /* Space between buttons */
+        }
+        .update-goal-card form .button-group button,
+        .update-goal-card form a {
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .update-goal-card form .button-group button {
+            background-color: #007bff;
+        }
+        .update-goal-card form .button-group button:hover {
+            background-color: #0056b3;
+        }
+        .update-goal-card form .button-group .back-button {
+            background-color: #6c757d;
+        }
+        .update-goal-card form .button-group .back-button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="update-goal-page">
+        <div class="update-goal-card">
+            <h1>Update Goal</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="goal_type">Goal Type</label>
+                    {{ form.goal_type }}
+                </div>
+                <div class="form-group">
+                    <label for="target_value">Target Value</label>
+                    {{ form.target_value }}
+                </div>
+                <div class="form-group">
+                    <label for="start_date">Start Date</label>
+                    {{ form.start_date }}
+                </div>
+                <div class="form-group">
+                    <label for="end_date">End Date</label>
+                    {{ form.end_date }}
+                </div>
+                <div class="form-group">
+                    <label for="achieved">Achieved</label>
+                    {{ form.achieved }}
+                </div>
+                <div class="button-group">
+                    <button type="submit">Update Goal</button>
+                    <a href="{% url 'admin_goals' %}" class="back-button">Back to Goals</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

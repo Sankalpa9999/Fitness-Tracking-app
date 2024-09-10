@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<div class="container">
+    <header>
+        <h1 class="title">Fitness Dashboard</h1>
+    </header>
+
+    <main class="content">
+
+        <div class="card">
+            <canvas id="workoutChart" width="500" height="300"></canvas>
+            <h2>Workout Metrics</h2>
+        </div>
+
+        <div class="card">
+            <h2>Recent Activity</h2>
+            <ul>
+                <li>
+                    <table border="2">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>exercise</th>
+                                <th>Duration</th>
+                                <th>Distance Covered</th>
+                                <th>Calories burnt</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for workout in workouts %}
+                            <tr>
+                                <td>{{ workout.date }}</td>
+                                <td>{{ workout.exercise }}</td>
+                                <td>{{ workout.duration }} </td>
+                                <!-- <td>{{ workout.exercise.muscle_group }} </td> -->
+                                <td>{{ workout.distance_covered }} K.M</td>
+                                <td>{{ workout.calories_burned }} Kcal</td>
+                                
+                               
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4">No recent workouts</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="card">
+            <h2>Common Workout Types</h2>
+            <table border="2">
+                <thead>
+                    <tr>
+                        <th>Exercise</th>
+                        <th>No. of Times</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for workout in common_workout %}
+                    <tr>
+                        <td>{{ workout.exercise__name }}</td>
+                        <td>{{ workout.count }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2">No common workout types found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </main>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('workoutChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    {% for workout in workouts %}
+                        '{{ workout.date|date:"Y-m-d" }}',
+                    {% endfor %}
+                ],
+        datasets: [{
+            label: 'Calories Burned',
+            data: [
+                {% for workout in workouts %}
+                            {{ workout.calories_burned }},
+        {% endfor %}
+    ],
+        backgroundColor: 'rgb(170, 216, 178)', // Green color for calories burned
+        borderColor: 'black',
+        borderWidth: 1,
+        fill: false
+                },
+        {
+            label: 'Distance Covered',
+            data: [
+                {% for workout in workouts %}
+                            {{ workout.distance_covered }},
+        {% endfor %}
+                    ],
+        backgroundColor: 'rgb(255, 159, 64)', // Orange color for distance covered
+        borderColor: 'black',
+        borderWidth: 1,
+        fill: false
+                }]
+            },
+        options: {
+        scales: {
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'day'
+                }
+            },
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,13 @@
+<!-- templates/membership_status.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Membership Status</h2>
+{% if user_membership %}
+    <p>Plan: {{ user_membership.membership.get_plan_type_display }}</p>
+    <p>Start Date: {{ user_membership.start_date }}</p>
+    <p>End Date: {{ user_membership.end_date }}</p>
+    <p>Status: {{ user_membership.is_active|yesno:"Active,Expired" }}</p>
+{% else %}
+    <p>You do not have an active membership. <a href="{% url 'membership_plans' %}">Join now</a>.</p>
+{% endif %}
+{% endblock %}

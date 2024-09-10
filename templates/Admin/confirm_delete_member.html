@@ -1,0 +1,73 @@
+<!-- templates/Admin/confirm_delete_member.html -->
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<style>
+    /* Add this CSS to your stylesheet or in the <style> tag in your base template */
+    .card {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        text-align: center;
+    }
+
+    .card h1 {
+        margin-bottom: 10px;
+        font-size: 1.5em;
+        color: #333;
+    }
+
+    .card p {
+        margin-bottom: 20px;
+        color: #666;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-delete {
+        background-color: #d9534f; /* Red color for delete */
+    }
+
+    .btn-delete:hover {
+        background-color: #c9302c;
+    }
+
+    .btn-cancel {
+        background-color: #5bc0de; /* Blue color for cancel */
+    }
+
+    .btn-cancel:hover {
+        background-color: #31b0d5;
+    }
+</style>
+
+<div class="card">
+    <h1>Confirm Delete</h1>
+    <p>Are you sure you want to delete "{{ member.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="button-group">
+            <button type="submit" class="btn btn-delete">Yes, Delete</button>
+            <a href="{% url 'admin_member_list_and_details' %}" class="btn btn-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

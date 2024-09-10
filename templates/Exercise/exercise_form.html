@@ -1,0 +1,89 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+{% load static %}
+    <title>{% if form.instance.pk %}Edit{% else %}New{% endif %} Exercise</title>
+    <style>
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px; /* Adjust max-width as per your design */
+            margin: 80px auto 20px auto; /* Center the card horizontally */
+            color: black;
+        }
+        .card h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333; /* Adjust text color for better readability */
+        }
+        .card form {
+            display: flex;
+            flex-direction: column;
+        }
+        .card form input,
+        .card form select,
+        .card form textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px; /* Adjust font size for readability */
+        }
+        .card form textarea {
+            resize: vertical;
+            min-height: 150px; /* Adjust minimum height for textarea */
+        }
+        .card form button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%; /* Make button full-width */
+        }
+        .card form button:hover {
+            background-color: #218838;
+        }
+        .back-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block; /* Adjust display to inline-block */
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        @media (min-width: 768px) {
+            .card {
+                width: 60%;
+            }
+        }
+        @media (min-width: 1024px) {
+            .card {
+                width: 50%;
+            }
+        }
+    </style>
+    <div class="card">
+        <h1>{% if form.instance.pk %}Edit{% else %}New{% endif %} Exercise</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
+        <a href="{% url 'admin_exercise_list' %}" class="back-button">Back to Exercise List</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    /* Container Style */
+.container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Style */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Button Group Alignment */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+}
+
+/* Button Style */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Danger Button Style */
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    transform: scale(1.05); /* Optional: slight scaling effect on hover */
+}
+
+/* Secondary Button Style */
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: scale(1.05); /* Optional: slight scaling effect on hover */
+}
+
+/* Paragraph Styling */
+p {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+</style>
+<div class="container">
+    <h2>Delete Scheduled Workout</h2>
+    <p>Are you sure you want to delete the scheduled workout for <strong>{{ scheduled_workout.workout_plan.exercise.name }}</strong> on <strong>{{ scheduled_workout.date }}</strong>?</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="button-group">
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'view_scheduled_workouts' %}" class="btn btn-secondary">No, Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
